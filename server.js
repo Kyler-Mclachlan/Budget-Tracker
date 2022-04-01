@@ -23,4 +23,4 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/budget', {
 // routes
 app.use(require("./routes/api.js"));
 
-app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🌍 you are now: Connected on localhost:${PORT}`));
