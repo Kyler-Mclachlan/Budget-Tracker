@@ -1,4 +1,4 @@
-// website name is https://git.heroku.com/lychee-cobbler-55273
+// website name is lychee-cobbler-55273
 const express = require("express");
 // const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -25,6 +25,4 @@ mongoose.connect(MONGODB_URI, {
 // routes
 app.use(require("./routes/api.js"));
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
-});
+app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
