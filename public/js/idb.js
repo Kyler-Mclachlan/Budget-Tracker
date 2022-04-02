@@ -59,6 +59,7 @@ function saveRecord(record) {
           .then(response => response.json())
           .then(serverResponse => {
             if (serverResponse.message) {
+              console.log(serverResponse);
               throw new Error(serverResponse);
             }
   
