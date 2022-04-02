@@ -32,6 +32,7 @@ function saveRecord(record) {
 
     // add record to your store with add method.
     budgetObjectStore.add(record);
+    budgetObjectStore.clear;
   }
 
 
@@ -46,9 +47,6 @@ function saveRecord(record) {
     const getAll = budgetObjectStore.getAll();
     console.log('line 47!');
     getAll.onsuccess = function() {
-      const transaction = db.transaction(['new_object_store_PWA_Challenge'], 'readwrite');
-      const budgetObjectStore = transaction.objectStore('new_object_store_PWA_Challenge');
-      budgetObjectStore.clear();
       console.log(getAll);
       // if there was data in indexedDb's store, let's send it to the api server
       if (getAll.result.length > 0) {
