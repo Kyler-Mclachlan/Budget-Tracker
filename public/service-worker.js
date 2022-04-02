@@ -3,19 +3,18 @@ const DATA_CACHE_NAME = 'budget-data-cache-v2';
 
 const FILES_TO_CACHE = [
     '/',
-    '/index.html',
-    '/manifest.json',
-    'public/css/styles.css',
-    'public/js/index.js',
-    'routes/api.js',
-    'public/icons/icons/icon-72x72.png',
-    'public/icons/icons/icon-96x96.png',
-    'public/icons/icons/icon-128x128.png',
-    'public/icons/icons/icon-144x144.png',
-    'public/icons/icon-152x152.png',
-    'public/icons/icon-192x192.png',
-    'public/icons/icon-384x384.png',
-    'public/icons/icon-512x512.png'
+    './index.html',
+    './manifest.json',
+    './css/styles.css',
+    './js/index.js',
+    './icons/icons/icon-72x72.png',
+    './icons/icons/icons/icon-96x96.png',
+    './icons/icons/icons/icon-128x128.png',
+    './icons/icons/icons/icon-144x144.png',
+    './icons/icons/icon-152x152.png',
+    './icons/icons/icon-192x192.png',
+    './icons/icons/icon-384x384.png',
+    './icons/icon-512x512.png'
   ];
 
   self.addEventListener('install', function(evt) {
@@ -29,21 +28,25 @@ const FILES_TO_CACHE = [
     self.skipWaiting();
   });
 
-  self.addEventListener('activate', function(evt) {
-    evt.waitUntil(
-      caches.keys().then(keyList => {
-        return Promise.all(
-          keyList.map(key => {
-            if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-              console.log('Removing old cache data', key);
-              return caches.delete(key);
-            }
-          })
-        );
+  self.addEventListener('activate', function (e) {
+    e.waitUntil(
+      caches.keys().then(function (keyList) {
+        // `keyList` contains all cache names under your username.github.io
+        // filter out ones that has this app prefix to create white list
+        let cacheKeeplist = keyList.filter(function (key) {
+          return key.indexOf(APP_PREFIX);
+        })
+        // add current cache name to white list
+        cacheKeeplist.push(CACHE_NAME);
+  
+        return Promise.all(keyList.map(function (key, i) {
+          if (cacheKeeplist.indexOf(key) === -1) {
+            console.log('deleting cache : ' + keyList[i] );
+            return caches.delete(keyList[i]);
+          }
+        }));
       })
     );
-  
-    self.clients.claim();
   });
 
 // Intercepts fetch requests
