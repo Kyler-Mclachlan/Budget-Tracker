@@ -44,7 +44,7 @@ function saveRecord(record) {
   
     // get all records from store and set to a variable
     const getAll = budgetObjectStore.getAll();
-  
+    console.log('line 47!');
     getAll.onsuccess = function() {
       // if there was data in indexedDb's store, let's send it to the api server
       if (getAll.result.length > 0) {
