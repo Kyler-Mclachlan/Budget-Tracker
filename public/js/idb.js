@@ -15,7 +15,7 @@ request.onupgradeneeded = function(event) {
 request.onsuccess = function(event) {
     db = event.target.result;
     if (navigator.onLine) {
-        saveRecord();
+      uploadBudget();
     }
   };
   
@@ -66,6 +66,7 @@ function saveRecord(record) {
             const budgetObjectStore = transaction.objectStore('new_object_store_PWA_Challenge');
             // clear all items in your store
             budgetObjectStore.clear();
+            console.log('clear');
           })
           .catch(err => {
             // set reference to redirect back here
