@@ -16,7 +16,6 @@ const FILES_TO_CACHE = [
     'public/icons/icon-192x192.png',
     'public/icons/icon-384x384.png',
     'public/icons/icon-512x512.png'
-
   ];
 
   self.addEventListener('install', function(evt) {
