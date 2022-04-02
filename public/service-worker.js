@@ -45,7 +45,7 @@ const FILES_TO_CACHE = [
     self.clients.claim();
   });
 
-// Intercept fetch requests
+// Intercepts fetch requests
 self.addEventListener('fetch', function(evt) {
     if (evt.request.url.includes('/api/')) {
       evt.respondWith(
@@ -57,7 +57,6 @@ self.addEventListener('fetch', function(evt) {
                 if (response.status === 200) {
                   cache.put(evt.request.url, response.clone());
                 }
-  
                 return response;
               })
               .catch(err => {
@@ -76,7 +75,6 @@ self.addEventListener('fetch', function(evt) {
           if (response) {
             return response;
           } else if (evt.request.headers.get('accept').includes('text/html')) {
-            // return the cached home page for all requests for html pages
             return caches.match('/');
           }
         });
