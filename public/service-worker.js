@@ -1,3 +1,5 @@
+const APP_PREFIX = 'Budget-';     
+const VERSION = 'version_01';
 const CACHE_NAME = 'my-budget-cache-v2';
 const DATA_CACHE_NAME = 'budget-data-cache-v2';
 
